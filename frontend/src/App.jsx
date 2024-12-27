@@ -5,6 +5,7 @@ import TeacherDashboard from "./pages/TeacherDashboard"
 import SetQuestions from "./pages/SetQuestions"
 import TakeTest from "./pages/TakeTest"
 import ViewPerformance from "./pages/ViewPerformance"
+import Home from "./pages/Home"
 
 function App() {
  
@@ -13,7 +14,7 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<SignIn />} />
+      <Route path="/" element={<Home />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/student" element={<StudentDashboard />} />
       <Route path="/teacher" element={<TeacherDashboard />} />
