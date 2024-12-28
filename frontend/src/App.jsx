@@ -1,4 +1,5 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { FormProvider, UserProvider, ThemeProvider } from "./context"
 import SignIn from "./components/SignIn"
 import StudentDashboard from "./pages/StudentDashboard"
 import TeacherDashboard from "./pages/TeacherDashboard"
@@ -13,6 +14,9 @@ function App() {
 
   return (
     <>
+    <FormProvider>
+      <UserProvider>
+        <ThemeProvider>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
@@ -25,10 +29,10 @@ function App() {
       <Route path="/student/performance" element={<ViewPerformance />} />
     </Routes>
     </BrowserRouter>
-
-    {/* <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1> */}
+</ThemeProvider>
+</UserProvider>
+</FormProvider>
+    
     </>
   )
 }

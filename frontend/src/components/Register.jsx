@@ -1,21 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {useFormContext} from "../context"
 import { TextField, Button, FormControl, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel, FormHelperText, Box, Typography } from '@mui/material';
 
 const Register = () => {
+  const {formData, updateFormData} = useFormContext();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    updateFormData(name, value); // Update form data
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted with data:', formData);
+  };
   return (
     <Box display="flex" alignItems="center" justifyContent="center" minHeight="100vh" bgcolor="#f0f0f0">
       <Box bgcolor="white" borderRadius="8px" boxShadow={3} p={4} width="100%" maxWidth="400px">
         <Typography variant="h5" component="h1" align="center" gutterBottom>
           Register
         </Typography>
-        <form>
+        <form onSubmit={handleSubmit}>
           <TextField
             label="Name"
             name="name"
             fullWidth
             margin="normal"
             variant="outlined"
+            value={formData.name}
+            onChange={handleInputChange}
           />
           <TextField
             label="Email"
@@ -24,6 +36,8 @@ const Register = () => {
             fullWidth
             margin="normal"
             variant="outlined"
+            value={formData.email}
+            onChange={handleInputChange}
           />
           <TextField
             label="Mobile Number"
@@ -32,13 +46,15 @@ const Register = () => {
             fullWidth
             margin="normal"
             variant="outlined"
+            value={formData.mobile}
+            onChange={handleInputChange}
           />
 
           <FormControl component="fieldset" margin="normal" fullWidth>
             <Typography variant="body1" color="textSecondary">
               Role
             </Typography>
-            <RadioGroup row name="role">
+            <RadioGroup row name="role" value={formData.role} onChange={handleInputChange} >
               <FormControlLabel value="student" control={<Radio />} label="Student" />
               <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
             </RadioGroup>
@@ -46,7 +62,7 @@ const Register = () => {
 
           <FormControl fullWidth margin="normal" variant="outlined">
             <InputLabel>Batch</InputLabel>
-            <Select name="batch" label="Batch">
+            <Select name="batch" label="Batch" value={formData.batch}  onChange={handleInputChange}>
               <MenuItem value="batch1">Batch 1</MenuItem>
               <MenuItem value="batch2">Batch 2</MenuItem>
               <MenuItem value="batch3">Batch 3</MenuItem>
@@ -59,6 +75,7 @@ const Register = () => {
             color="primary"
             fullWidth
             sx={{ mt: 2 }}
+           
           >
             Register
           </Button>
@@ -72,6 +89,7 @@ const Register = () => {
             </Typography>
           </Link>
         </Box>
+        
       </Box>
     </Box>
   );
